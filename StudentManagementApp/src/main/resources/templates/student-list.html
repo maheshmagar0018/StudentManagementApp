@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Students List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <link rel="stylesheet" href="https://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-4.dtd" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+
+<body class="bg-light">
+
+<!-- <div sec:authorize="hasAuthority('ADMIN')">
+        <h1>Student List (Admin)</h1>
+    </div> -->
+
+<div class="container mt-5">
+        <h2 class="text-center mb-4">Students List</h2>
+        <a th:href="@{/admin-page}" class="btn btn-primary mb-3">Home</a>
+        
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+
+<tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Age</th>
+    <th>Date of Birth</th>
+    <th>Gender</th>
+    <th>Mobile number</th>
+    <th>Email</th>
+    <th>Place of Birth</th>
+    <th>Edit</th>
+    <th>Delete</th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="student : ${students}">
+    <td th:text="${student.id}"></td>
+    <td th:text="${student.firstName}"></td>
+    <td th:text="${student.lastName}"></td>
+    <td th:text="${student.age}"></td>
+    <td th:text="${student.dateOfBirth}"></td>
+    <td th:text="${student.gender}"></td>
+    <td th:text="${student.mobileNumber}"></td>
+    <td th:text="${student.email}"></td>
+    <td th:text="${student.birthPlace}"></td>
+    <td><a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary btn-sm">Edit</a></td>
+    <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">Delete</a></td>
+    
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

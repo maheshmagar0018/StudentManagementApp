@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0e2433;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: rgb(255, 128, 128);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(0, 255, 0);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgb(255, 128, 0);
+        }
+
+        h2 {
+            color: rgb(255, 255, 0);
+        }
+
+        /* Add more styles and components for your dashboard here */
+    </style>
+    
+    <style>
+        body {
+            background-color: #f0e8c7;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .button {
+            display: inline-block;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="header">
+        <h1>ADMIN Dashboard</h1> 
+         <div align="right"><h2>Welcome, [[${user.getFullname()}]]</h2> 
+        <span sec:authorize="isAuthenticated">
+        <a th:href="@{/logout}">
+         Logout
+        
+        </a>
+        </span>
+        </div>
+    </div>
+    <div class="container">
+        
+        <h2>Welcome to Student Management System</h2>
+      <a th:href="@{/students/add}" class="button">Add Students</a>
+      <a th:href="@{/students/view}" class="button">View Students</a>
+        
+    </div>
+             
+</body>
+</html>

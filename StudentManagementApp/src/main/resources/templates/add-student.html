@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="ISO-8859-1">
+    
+    <head>
+    <title>Students List</title>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script th:src="@{/js/validation.js}" defer="defer"></script>
+    
+</head>
+    
+<body class="bg-light">
+<div class="container mt-5">
+
+     <a th:href="@{/admin-page}" class="btn btn-secondary mt-3">Home</a>
+
+    <div class="card bg-info text-white">
+        <div class="card-header">
+            <h2 class="mb-0">Add Student</h2>
+        </div>    
+        
+        
+        <!-- <div sec:authorize="hasAuthority('ADMIN')">
+        <h1>Student List (Admin)</h1>
+    </div> -->
+    
+    
+    <div class="card-body">
+            <form th:object="${student}" th:action="@{/students/add}" method="post" onsubmit="return validateForm()">
+        
+        <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" th:field="*{firstName}" class="form-control" required="required"/>
+                    <span id="firstNameError" class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                          th:errors="*{firstName}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" th:field="*{lastName}" class="form-control" required="required"/>
+                    <span id="lastNameError" class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                          th:errors="*{lastName}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" th:field="*{age}" class="form-control" required="required"/>
+                    <span id="ageError" class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+                </div>
+               
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth (mm-dd-yyyy):</label>
+                    <input type="date" th:field="*{dateOfBirth}" class="form-control" required="required"/>
+                    <span id="dateOfBirthError" class="text-danger"
+                          th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="form-check">
+                        <input type="radio" th:field="*{gender}" value="Male" class="form-check-input" required="required"/>
+                        <label class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" th:field="*{gender}" value="Female" class="form-check-input" required="required"/>
+                        <label class="form-check-label">Female</label>
+                    </div>
+                    <span id="genderError" class="text-danger" th:if="${#fields.hasErrors('gender')}"
+                          th:errors="*{gender}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile Number:</label>
+                    <input type="number" th:field="*{mobileNumber}" class="form-control" required="required"/>
+                    <span id="mobileNumberError" class="text-danger"
+                          th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></span>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" class="form-control" required="required"/>
+                    <span id="emailError" class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthPlace">Birth Place:</label>
+                    <select th:field="*{birthPlace}" class="form-control" required="required">      
+            <option value=""></option>
+            <option value="AP|Andhra Pradesh">Andhra Pradesh</option>
+            <option value="AR|Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="AS|Assam">Assam</option>
+            <option value="BR|Bihar">Bihar</option>
+            <option value="CT|Chhattisgarh">Chhattisgarh</option>
+            <option value="GA|Goa">Goa</option>
+            <option value="GJ|Gujarat">Gujarat</option>
+            <option value="HR|Haryana">Haryana</option>
+            <option value="HP|Himachal Pradesh">Himachal Pradesh</option>
+            <option value="JK|Jammu and Kashmir">Jammu and Kashmir</option>
+            <option value="JH|Jharkhand">Jharkhand</option>
+            <option value="KA|Karnataka">Karnataka</option>
+            <option value="KL|Kerala">Kerala</option>
+            <option value="MP|Madhya Pradesh">Madhya Pradesh</option>
+            <option value="MH|Maharashtra">Maharashtra</option>
+            <option value="MN|Manipur">Manipur</option>
+            <option value="ML|Meghalaya">Meghalaya</option>
+            <option value="MZ|Mizoram">Mizoram</option>
+            <option value="NL|Nagaland">Nagaland</option>
+            <option value="OR|Odisha">Odisha</option>
+            <option value="PB|Punjab">Punjab</option>
+            <option value="RJ|Rajasthan">Rajasthan</option>
+            <option value="SK|Sikkim">Sikkim</option>
+            <option value="TN|Tamil Nadu">Tamil Nadu</option>
+            <option value="TG|Telangana">Telangana</option>
+            <option value="TR|Tripura">Tripura</option>
+            <option value="UT|Uttarakhand">Uttarakhand</option>
+            <option value="UP|Uttar Pradesh">Uttar Pradesh</option>
+            <option value="WB|West Bengal">West Bengal</option>
+            <option value="AN|Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+            <option value="CH|Chandigarh">Chandigarh</option>
+            <option value="DN|Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+            <option value="DD|Daman and Diu">Daman and Diu</option>
+            <option value="DL|Delhi">Delhi</option>
+            <option value="LD|Lakshadweep">Lakshadweep</option>
+            <option value="PY|Puducherry">Puducherry</option>   
+                    </select>
+                    <span id="birthPlaceError" class="text-danger" th:if="${#fields.hasErrors('birthPlace')}"
+                          th:errors="*{birthPlace}"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Add</button>
+        
+    </form>
+    </div>
+    
+  </div>
+</div>
+   
+    <script th:inline="javascript">
+        
+        function validateForm(){
+        	var firstName = document.getElementById('firstName').value;
+        	var lastName = document.getElementById('lastName').value;
+        	var age = document.getElementById('age').value;
+            var dateOfBirth = document.getElementById('dateOfBirth').value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var mobileNumber = document.getElementById('mobileNumber').value;
+            var email = document.getElementById('email').value;
+            var birthPlace = document.getElementById('birthPlace').value;
+            
+            var isValid = true;
+            
+            if(firstName.length < 3){
+            	alert('firstNameError');
+            	isValid = false;
+            }
+            
+            if(lastName.length < 3){
+            	alert('lastNameError');
+            	isValid = false;
+            }
+            
+            if(age < 18){
+            	alert('ageError');
+            	isValid = false;
+            }
+            
+            if(!isValidDate(dateOfBirth)){
+            	alert('dateOfBirthError');
+            	isValid = false;
+            }
+            
+            if (!gender) {
+                alert('genderError');
+                isValid = false;
+            }
+
+            if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+                alert('mobileNumberError');
+                isValid = false;
+            }
+
+            if (!isValidEmail(email)) {
+                alert('emailError');
+                isValid = false;
+            }
+            
+            if (birthPlace === '') {
+                alert('birthPlaceError');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+               
+    </script>  
+</body>
+</html>
